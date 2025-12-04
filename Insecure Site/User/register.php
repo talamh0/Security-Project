@@ -33,12 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // insert if no errors
     if (count($errors) === 0) {
 
-        // hash password
-        $hashed = password_hash($password, PASSWORD_DEFAULT);
 
         // insert user
-        $sql = "INSERT INTO users (name, email, password)
-                VALUES ('$name', '$email', '$hashed')";
+    $sql = "INSERT INTO users (name, email, password)
+        VALUES ('$name', '$email', '$password')";
+
 
         // success redirect
         if (mysqli_query($conn, $sql)) {
