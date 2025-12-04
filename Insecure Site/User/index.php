@@ -26,8 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
 
-            // verify password
-            if (!empty($row["password"]) && password_verify($password, $row["password"])) {
+           if ($password === $row["password"]) {
 
                 // store session data
                 $_SESSION['user_id'] = $row['id'];
