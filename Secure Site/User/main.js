@@ -37,7 +37,7 @@
             const rating = ratingInput.value;
 
             if(text && rating){
-                fetch("add-review.php", {
+                fetch("add-reviews.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ text, rating })

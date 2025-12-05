@@ -12,8 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = trim($_POST["password"]);
     $confirm  = trim($_POST["confirm"]);
 
+    $clean_name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+
     // validate required fields
-    if (empty($name) || empty($email) || empty($password) || empty($confirm)) {
+    if (empty($clean_name) || empty($email) || empty($password) || empty($confirm)) {
         $errors[] = "All fields are required.";
     }
 
@@ -38,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // insert user
         $sql = "INSERT INTO users (name, email, password)
-                VALUES ('$name', '$email', '$hashed')";
+                VALUES ('$clean_name', '$email', '$hashed')";
 
         // success redirect
         if (mysqli_query($conn, $sql)) {

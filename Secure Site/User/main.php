@@ -10,7 +10,7 @@ if(!isset($_SESSION['user_id'])) {
 
 // بيانات المستخدم
 $user_id = $_SESSION['user_id'];
-$username = $_SESSION['name']; // أو $_SESSION['username']
+$username = $_SESSION['name']; 
 ?>
 
 <!DOCTYPE html>

@@ -22,9 +22,13 @@ if(empty($text) || $rating < 1 || $rating > 5) {
 
 $user_id = $_SESSION['user_id'];
 
+// تنظيف مدخلات النص لمنع XSS
+$clean_text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+
+
 // إدراج التعليق في قاعدة البيانات
 $stmt = $conn->prepare("INSERT INTO reviews (user_id, rating, text) VALUES (?, ?, ?)");
-$stmt->bind_param("iis", $user_id, $rating, $text);
+$stmt->bind_param("iis", $user_id, $rating, $clean_text);
 
 if ($stmt->execute()) {
     $last_id = $stmt->insert_id;;
