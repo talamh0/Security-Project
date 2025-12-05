@@ -65,18 +65,18 @@
 
             const reviewerName = document.createElement("div");
             reviewerName.classList.add("reviewer-name");
-            reviewerName.textContent = review.username;
+            reviewerName.innerHTML = review.username;
 
             const reviewStars = document.createElement("div");
             reviewStars.classList.add("review-rating");
-            reviewStars.textContent = "⭐".repeat(review.rating);
+            reviewStars.innerHTML = "⭐".repeat(review.rating);
 
             reviewHeader.appendChild(reviewerName);
             reviewHeader.appendChild(reviewStars);
 
             const reviewText = document.createElement("p");
             reviewText.classList.add("review-text");
-            reviewText.textContent = review.text;
+            reviewText.innerHTML = review.text;
 
             reviewItem.appendChild(reviewHeader);
             reviewItem.appendChild(reviewText);
