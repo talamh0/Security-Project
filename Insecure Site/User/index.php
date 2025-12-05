@@ -65,48 +65,48 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     background-size: cover;
 ">
 
-<div class="login-page">
-<div class="auth-box">
+    <div class="login-page">
+        <div class="auth-box">
 
-    <!-- logo -->
-    <div style="text-align:center; margin-bottom:20px;">
-        <img src="/web/image/sixflags.png" alt="Logo" style="width:160px;">
+            <!-- logo -->
+            <div style="text-align:center; margin-bottom:20px;">
+                <img src="/web/image/sixflags.png" alt="Logo" style="width:160px;">
+            </div>
+
+            <!-- page title -->
+            <h2 style="text-align:center;">Login</h2>
+
+            <?php
+            // success message after registration
+            if (isset($_GET["registered"])) {
+                echo "<div class='success'>Account created successfully. You can now login.</div>";
+            }
+
+            // user tried accessing a protected page
+            if (isset($_GET["login_required"])) {
+                echo "<div class='error'>Please login to continue.</div>";
+            }
+
+            // login errors
+            if (!empty($error)) {
+                echo "<div class='error'>$error</div>";
+            }
+            ?>
+
+            <!-- login form -->
+            <form method="POST" action="">
+                <input type="email" name="email" placeholder="Email Address">
+                <input type="password" name="password" placeholder="Password">
+                <button type="submit">Login</button>
+            </form>
+
+            <!-- register link -->
+            <div class="link">
+                Not a member? <a href="register.php">Create an account</a>
+            </div>
+
+        </div>
     </div>
-
-    <!-- page title -->
-    <h2 style="text-align:center;">Login</h2>
-
-    <?php
-    // success message after registration
-    if (isset($_GET["registered"])) {
-        echo "<div class='success'>Account created successfully. You can now login.</div>";
-    }
-
-    // user tried accessing a protected page
-    if (isset($_GET["login_required"])) {
-        echo "<div class='error'>Please login to continue.</div>";
-    }
-
-    // login errors
-    if (!empty($error)) {
-        echo "<div class='error'>$error</div>";
-    }
-    ?>
-
-    <!-- login form -->
-    <form method="POST" action="">
-        <input type="email" name="email" placeholder="Email Address">
-        <input type="password" name="password" placeholder="Password">
-        <button type="submit">Login</button>
-    </form>
-
-    <!-- register link -->
-    <div class="link">
-        Not a member? <a href="register.php">Create an account</a>
-    </div>
-
-</div>
-</div>
 
 </body>
 </html>

@@ -74,43 +74,42 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     background-size: cover;
 ">
 
-<div class="login-page">
-<div class="auth-box">
+    <div class="login-page">
+        <div class="auth-box">
 
-    <!-- logo -->
-    <div style="text-align:center; margin-bottom:20px;">
-        <img src="/web/image/sixflags.png" alt="Logo" style="width:160px;">
+            <!-- logo -->
+            <div style="text-align:center; margin-bottom:20px;">
+                <img src="/web/image/sixflags.png" alt="Logo" style="width:160px;">
+            </div>
+
+            <!-- page heading -->
+            <h2>Create Account</h2>
+
+            <!-- show errors -->
+            <?php
+            if (!empty($errors)) {
+                echo "<div class='error'>";
+                foreach ($errors as $e) echo "<p>$e</p>";
+                echo "</div>";
+            }
+            ?>
+
+            <!-- register form -->
+            <form method="POST" action="">
+                <input type="text" name="name" placeholder="Full Name">
+                <input type="email" name="email" placeholder="Email Address">
+                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="confirm" placeholder="Confirm Password">
+                <button type="submit">Register</button>
+            </form>
+
+            <!-- login link -->
+            <div class="link">
+                Already have an account? <a href="index.php">Login here</a>
+            </div>
+
+        </div>
     </div>
-
-    <!-- page heading -->
-    <h2>Create Account</h2>
-
-    <!-- show errors -->
-    <?php
-    if (!empty($errors)) {
-        echo "<div class='error'>";
-        foreach ($errors as $e) echo "<p>$e</p>";
-        echo "</div>";
-    }
-    ?>
-
-    <!-- register form -->
-    <form method="POST" action="">
-        <input type="text" name="name" placeholder="Full Name">
-        <input type="email" name="email" placeholder="Email Address">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="confirm" placeholder="Confirm Password">
-        <button type="submit">Register</button>
-    </form>
-
-    <!-- login link -->
-    <div class="link">
-        Already have an account? <a href="index.php">Login here</a>
-    </div>
-
-</div>
-</div>
-
 </body>
 </html>
 
