@@ -38,7 +38,7 @@ if(isset($_POST['login'])){
 <div class="admin-login-card">
 
 <div class="admin-login-logo">
-    <img src="/web/image/sixflags.png" alt="Six Flags Logo"> 
+    <img src="../image/sixflags.png" alt="Six Flags Logo"> 
 </div>
 
 <h2>Admin Login</h2>

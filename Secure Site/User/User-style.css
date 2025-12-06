@@ -383,7 +383,7 @@ button[name="reserve"] {
   justify-content: center;
   margin: 0;
   background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("/web/image/hero-bg.png") center center / cover no-repeat fixed;
+    url("../image/hero-bg.png") center center / cover no-repeat fixed;
 }
 
 /* login form box */
@@ -568,7 +568,7 @@ body {
 /* HERO */
 .hero {
     height: 100vh;
-    background: url('/web/image/hero-bg.png') center/cover no-repeat;
+    background: url('../image/hero-bg.png') center/cover no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -999,3 +999,6 @@ body {
 .rating span:hover ~ span {
     color: var(--yellow-main);    /* نجوم مضيئة */
 }
+
+
+
