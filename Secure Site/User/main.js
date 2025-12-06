@@ -91,10 +91,10 @@
 
     /*  CAROUSEL JS */
     const rides = [
-        { title: "Steam Racer", img: "/web/image/Iron_Rattler.png", desc: "The iconic steampunk coaster of Qiddiya." },
-        { title: "Orbital Spin", img: "/web/image/Gyrospin.png", desc: "A thrilling spinning experience with neon lights." },
-        { title: "Falcon Loop", img: "/web/image/Spitfire.jpg", desc: "A high-speed coaster with insane drops." },
-        { title: "Carousel Kids", img: "/web/image/Arabian_Carousel.jpg", desc: "A gentle and fun ride for families." }
+        { title: "Steam Racer", img: "../image/Iron_Rattler.png", desc: "The iconic steampunk coaster of Qiddiya." },
+        { title: "Orbital Spin", img: "../image/Gyrospin.png", desc: "A thrilling spinning experience with neon lights." },
+        { title: "Falcon Loop", img: "../image/Spitfire.jpg", desc: "A high-speed coaster with insane drops." },
+        { title: "Carousel Kids", img: "../image/Arabian_Carousel.jpg", desc: "A gentle and fun ride for families." }
     ];
 
     const carousel = document.getElementById("carousel");

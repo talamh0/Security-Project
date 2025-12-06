@@ -1,4 +1,4 @@
-Index.php
+
 
 <?php
 ini_set('session.cookie_httponly', 1);
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <!-- logo -->
     <div style="text-align:center; margin-bottom:20px;">
-        <img src="/web/image/sixflags.png" alt="Logo" style="width:160px;">
+        <img src="../image/sixflags.png" alt="Logo" style="width:160px;">
     </div>
 
     <!-- page title -->

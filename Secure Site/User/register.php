@@ -1,4 +1,4 @@
-register.php
+
 
 <?php
 include 'config.php';
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <body style="
     background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('/web/image/hero-bg.png') no-repeat center center fixed;
+    url('../image/hero-bg.png') no-repeat center center fixed;
     background-size: cover;
 ">
 
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <!-- logo -->
     <div style="text-align:center; margin-bottom:20px;">
-        <img src="/web/image/sixflags.png" alt="Logo" style="width:160px;">
+        <img src="../image/sixflags.png" alt="Logo" style="width:160px;">
     </div>
 
     <!-- page heading -->

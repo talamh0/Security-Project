@@ -27,16 +27,17 @@ $username = $_SESSION['name']; // أو $_SESSION['username']
     <!-- HEADER -->
     <header class="header">
         <nav class="nav-container">
-            <img src="/web/image/sixflags.png" class="logo-img">
+            <img src="../image/sixflags.png" class="logo-img">
             <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#rides">Rides</a></li>
-                <li><a href="#book">Book</a></li>
-                <li><a href="#contact" style="font-weight:700;">Contact</a></li>
-            </ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#rides">Rides</a></li>
+                    <li><a href="#book">Book</a></li>
+                    <li><a href="#contact" style="font-weight:700;">Contact</a></li>
+                    <li><a href="dashboard.php" class="dashboard-link">Dashboard</a></li>
+                </ul>
             <div class="right-logos">
-                <img src="/web/image/qiddiya.png">
-                <img src="/web/image/vision2030.png">
+                <img src="../image/qiddiya.png">
+                <img src="../image/vision2030.png">
             </div>
         </nav>
     </header>
@@ -62,7 +63,7 @@ $username = $_SESSION['name']; // أو $_SESSION['username']
     <!-- BOOK NOW -->
     <section class="book-banner" id="book">
         <div class="book-left">
-            <img src="/web/image/boy.png">
+            <img src="../image/boy.png">
         </div>
         <div class="book-right">
             <div class="book-right-content">
