@@ -1,8 +1,10 @@
 <?php
-session_start();
 ini_set('session.cookie_httponly', 1);
 ini_set('session.cookie_secure', 1);
-ini_set('session.cookie_samesite', 'Strict');
+ini_set('session.cookie_samesite', 1);
+
+session_start();
+
 
 include 'config.php';
 header('Content-Type: application/json');
