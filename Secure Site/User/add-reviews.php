@@ -10,7 +10,7 @@ include 'config.php';
 header('Content-Type: application/json');
 
 // التحقق من تسجيل الدخول
-if(!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
     exit();
 }
