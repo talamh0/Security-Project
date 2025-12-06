@@ -18,7 +18,7 @@ if(isset($_POST['login'])){
     // Process login form submission
     if($username === "admin" && $password === "admin123"){
         // Store admin login session and redirect
-        $_SESSION['admin_logged_in'] = true;
+        $_SESSION['role'] = 'admin';
         header("Location: manageEvents.php");
         exit();
     } else {

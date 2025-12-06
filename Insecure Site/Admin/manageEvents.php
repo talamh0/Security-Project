@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-// Restrict access to admin users only
-if(!isset($_SESSION['admin_logged_in'])){ header("Location: admin.php"); exit(); }
-
 // Load database configuration
 include("config.php");
 
