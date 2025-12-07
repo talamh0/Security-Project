@@ -66,20 +66,11 @@ This allows the user to log in.
 ### 2. Weak Password Storage
 
 **Insecure Version**
+- Open the database and view the users table.
+- Inspect the password column.
 - Passwords were stored in plain text inside the database.
 - This allows attackers to read all passwords if the database is compromised.
 
-**Secure Fix**
-Use hashing + verification:
-
-```php
-$hashed = password_hash($password, PASSWORD_DEFAULT);
-
-if (password_verify($password, $user['password'])) {
-    
-}
-
-```
 
 ### 3. Cross-Site Scripting (XSS)
 
