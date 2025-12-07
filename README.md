@@ -65,12 +65,19 @@ This allows the user to log in.
 
 ### 2. Weak Password Storage
 
-**Insecure Version**
-- Open the database and view the users table.
-- Inspect the password column.
-- Passwords were stored in plain text inside the database.
-- This allows attackers to read all passwords if the database is compromised.
-
+Passwords in the insecure version were stored using MD5, which is weak and easily cracked.
+1- Register a new user.
+2- Open phpMyAdmin → users table.
+3- Observe that the stored password is an MD5 hash (e.g., 5f4dcc3b5aa765d61d8327deb882cf99).
+4- Use an online MD5 cracker to verify that the password can be recovered easily.
+Then we replaced MD5 with strong hashing using bcrypt:
+```html
+$hashed = password_hash($password, PASSWORD_BCRYPT);
+```
+And for login:
+```html
+password_verify($password, $user['password']);
+```
 
 ### 3. Cross-Site Scripting (XSS)
 
