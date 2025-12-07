@@ -1,6 +1,4 @@
 <?php
-
-
 // 1. FORCE HTTPS REDIRECTION
 // Ensures all communication is encrypted (TLS/SSL) to protect credentials and session tokens from man-in-the-middle attacks.
 if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") {
