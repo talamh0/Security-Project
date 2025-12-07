@@ -62,10 +62,14 @@ Insecure Version
 
 Secure Fix
 
-Passwords are now hashed before being stored:
+Passwords are now hashed before storing in the database using password_hash().
+Verification is done securely using password_verify().
 $hashed = password_hash($password, PASSWORD_DEFAULT);
-Verification is done securely using:
-password_verify($password, $user['password']);
+
+if (password_verify($password, $user['password'])) {
+    // login success
+}
+
 
 ### 3. Cross-Site Scripting (XSS)  
 - When registe , try using this username:
