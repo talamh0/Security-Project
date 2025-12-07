@@ -11,14 +11,15 @@ if(isset($_SESSION['admin_logged_in'])){
 $error = "";
 
 if(isset($_POST['login'])){
-
+// include database connection details
     include("config.php");
 
     // sanitize input
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    // use prepared statement to prevent sql injection
+    // use prepared statement to safely fetch admin record by username
+    // this prevents sql injection attacks
     $stmt = $conn->prepare("SELECT id, username, password FROM admin WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -28,14 +29,14 @@ if(isset($_POST['login'])){
     if ($result->num_rows === 1) {
         $admin = $result->fetch_assoc();
 
-        // verify password hash
+        // verify the submitted password against the stored bcrypt hash
         if (password_verify($password, $admin['password'])) {
 
            // set session variables
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_id'] = $admin['id'];
             $_SESSION['username'] = $admin['username'];
-
+            // redirect to the events management page
             header("Location: manageEvents.php");
             exit();
 
