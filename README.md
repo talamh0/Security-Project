@@ -59,11 +59,15 @@ The project contains **two versions** of the application:
 
 ### 3. Cross-Site Scripting (XSS)  
 - When registe , try using this username:
-   ```<script>alert('xss')</script>```
-   Then open the Dashboard and observe.
+```html
+<script>alert('xss')</script>
+```
+Then open the Dashboard and observe.
 
 - Try adding a comment with the following text:
-   ```<img src=x onerror=alert('xss')>```
+   ```html
+  <img src=x onerror=alert('xss')>
+   ```
 
 ### 4. Access Control  
 //
