@@ -1,7 +1,7 @@
 <?php
 ini_set('session.cookie_httponly', 1);
 ini_set('session.cookie_secure', 1);
-ini_set('session.cookie_samesite', 1);
+ini_set('session.cookie_samesite', Strict);
 session_start();
 
 if(isset($_SESSION['admin_logged_in'])){
