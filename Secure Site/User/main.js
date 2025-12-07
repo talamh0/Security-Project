@@ -6,7 +6,7 @@
         const ratingInput = document.getElementById("review-rating");
         const ratingStars = document.querySelectorAll("#rating span");
 
-        // جلب التعليقات من السيرفر
+       
         fetch("get-reviews.php")
         .then(res => res.json())
         .then(data => {
@@ -14,7 +14,7 @@
             data.forEach(review => addReviewToList(review, false));
         });
 
-        // تفعيل النجوم التفاعلية
+        
         ratingStars.forEach(star => {
             star.addEventListener("mouseover", () => highlightStars(star.dataset.value));
             star.addEventListener("mouseout", () => highlightStars(ratingInput.value));
@@ -30,7 +30,7 @@
             });
         }
 
-        // إضافة تعليق جديد للسيرفر والواجهة
+        
         reviewForm.addEventListener("submit", e => {
             e.preventDefault();
             const text = document.getElementById("review-input").value.trim();
@@ -55,7 +55,7 @@
             }
         });
 
-        // دالة لإضافة تعليق للقائمة
+        
         function addReviewToList(review, prepend = true) {
             const reviewItem = document.createElement("div");
             reviewItem.classList.add("review-item");
