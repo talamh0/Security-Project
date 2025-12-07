@@ -5,39 +5,37 @@ include 'config.php';
 // default error
 $error = "";
 
+// handle login form
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // get form inputs
-    $email = isset($_POST["email"]) ? trim($_POST["email"]) : "";
+    $username = isset($_POST["name"]) ? trim($_POST["name"]) : "";
     $password = isset($_POST["password"]) ? trim($_POST["password"]) : "";
 
-    if (empty($email) || empty($password)) {
+    if (empty($username) || empty($password)) {
         $error = "Please fill in all fields.";
 
     } else {
 
-        // still insecure (SQL Injection allowed)
-        $query = "SELECT * FROM users WHERE email = '$email'";
+        // ❌ Insecure MD5 hashing (required for the vulnerable version)
+        $hashed_password = md5($password);
+
+        // still insecure SQL Injection
+        $query = "SELECT * FROM users WHERE name = '$username' AND password = '$hashed_password'";
         $result = mysqli_query($conn, $query);
 
-        if (mysqli_num_rows($result) === 1) {
+        if (mysqli_num_rows($result) >= 1) {
+
             $row = mysqli_fetch_assoc($result);
 
-            // Insecure MD5 password comparison
-            if (md5($password) === $row["password"]) {
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['name']    = $row['name'];
 
-                $_SESSION['user_id'] = $row['id'];
-                $_SESSION['name']    = $row['name'];
-
-                header("Location: main.php");
-                exit();
-
-            } else {
-                $error = "Wrong password.";
-            }
+            header("Location: main.php");
+            exit();
 
         } else {
-            $error = "User not found.";
+            $error = "Wrong username or password.";
         }
     }
 }
