@@ -53,7 +53,7 @@ The project contains **two versions** of the application:
 
 ### 1. SQL Injection  
 **Insecure Version**
-- The login and registration queries were built using string concatenation, which allowed attackers to inject SQL code.
+- The login query was built using string concatenation, which allowed attackers to inject SQL code.
   
 ```php
 ' OR '1'='1' #
