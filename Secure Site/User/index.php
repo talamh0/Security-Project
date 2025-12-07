@@ -8,7 +8,7 @@ include 'config.php';
 // default error message variable
 $error = "";
 
-// handle login form submission (post request)
+// handle login form submission 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // get and sanitize form inputs
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     } else {
 
-        // check username in database using prepared statement (prevents sql injection)
+        // check username in database using prepared statement 
         $stmt = $conn->prepare("SELECT id, name, password, role FROM users WHERE name = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
