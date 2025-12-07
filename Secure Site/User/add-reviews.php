@@ -6,7 +6,9 @@ require_once 'security_config.php';
 include 'config.php';
 header('Content-Type: application/json');
 
-// check if user is logged in and has the required 'user' role
+// Role-based access control (RBAC):
+// Only authenticated users with role = 'user' are allowed to submit reviews.
+// Any request without the correct role is rejected with a JSON error.
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
     exit();
