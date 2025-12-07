@@ -1,9 +1,10 @@
 <?php
 session_start();
+// Insecure access control: session is started but there is no user identity or role stored from the database.
 
-// Redirect already logged-in admins directly to the dashboard
+// Insecure: Only a simple flag is used to identify an admin session.
 if(isset($_SESSION['admin_logged_in'])){
-    header("Location: manageEvents.php");
+    header("Location: manageEvents.php"); // No additional role or permission check here.
     exit();
 }
 
@@ -15,8 +16,11 @@ if(isset($_POST['login'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    // Insecure access control: admin identity is hard-coded and not linked to any user record or role.
+    // Any user who knows these credentials will gain full admin privileges.
     if($username === "admin" && $password === "admin123"){
-
+        
+        // No server-side verification of admin role beyond matching hard-coded username/password.
         $_SESSION['admin_logged_in'] = true;
         header("Location: manageEvents.php");
         exit();
