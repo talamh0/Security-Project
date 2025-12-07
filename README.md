@@ -67,10 +67,10 @@ Use hashing + verification:
 $hashed = password_hash($password, PASSWORD_DEFAULT);
 
 if (password_verify($password, $user['password'])) {
-    // Login successful
+    
 }
 
-
+```
 
 ### 3. Cross-Site Scripting (XSS)
 
