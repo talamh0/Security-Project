@@ -1,5 +1,8 @@
 <?php
 session_start();
+// This page does NOT check whether the user is logged in OR whether they are an admin.
+// Anyone can directly access manageEvents.php simply by typing the URL.
+
 
 // Load database configuration
 include("config.php");
