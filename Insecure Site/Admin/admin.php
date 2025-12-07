@@ -15,14 +15,12 @@ if(isset($_POST['login'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Process login form submission
     if($username === "admin" && $password === "admin123"){
-        // Store admin login session and redirect
+
         $_SESSION['admin_logged_in'] = true;
         header("Location: manageEvents.php");
         exit();
     } else {
-        // Show error if credentials are incorrect
         $error = "Invalid username or password.";
     }
 }

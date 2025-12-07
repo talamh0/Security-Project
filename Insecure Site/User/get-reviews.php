@@ -3,7 +3,8 @@ session_start();
 include 'config.php';
 header('Content-Type: application/json');
 
-// استعلام لجلب التعليقات مع اسم المستخدم
+ // No prepared statements are used here
+// this query vulnerable to SQL Injection.
 $query = "
     SELECT r.id, u.name AS username, r.rating, r.text, r.created_at
     FROM reviews r
@@ -12,6 +13,9 @@ $query = "
 ";
 
 $result = mysqli_query($conn, $query);
+
+// the review content is returned without sanitization
+// which may allow XSS when displayed.
 
 $reviews = [];
 while($row = mysqli_fetch_assoc($result)) {

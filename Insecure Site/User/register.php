@@ -12,7 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST["password"];
     $confirm  = $_POST["confirm"];
 
-    // basic validation only (still insecure)
+    // The value assigned to $name is taken directly from user input
+    // without any sanitization 
+
+    // basic validation of required fields
     if (empty($name) || empty($email) || empty($password) || empty($confirm)) {
         $errors[] = "All fields are required.";
     }
@@ -21,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] = "Passwords do not match.";
     }
 
-    // insecure SQL query – SQL Injection allowed
+    // insecure SQL query – (no prepared statements)
     $checkEmail = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $checkEmail);
 
@@ -52,14 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <!-- page title -->
     <title>Register</title>
-
-    <!-- main css -->
     <link rel="stylesheet" href="User-style.css">
-
-    <!-- fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 

@@ -1,7 +1,5 @@
 <?php
-// --------------------------------------------------
 // Session Protection
-// --------------------------------------------------
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -9,35 +7,25 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// --------------------------------------------------
-// Connect to Database
-// --------------------------------------------------
 require_once "config.php";
 
 $user_id = $_SESSION['user_id'];
 
 
-// --------------------------------------------------
 // Fetch Logged-in User Information
-// --------------------------------------------------
 $stmt = $conn->prepare("SELECT name, email FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
 
 
-// --------------------------------------------------
 // Fetch Total Bookings
-// --------------------------------------------------
 $stmt = $conn->prepare("SELECT COUNT(*) AS total FROM bookings WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $total_bookings = $stmt->get_result()->fetch_assoc()['total'];
 
-
-// --------------------------------------------------
 // Fetch Recent Bookings (limit 5)
-// --------------------------------------------------
 $stmt = $conn->prepare("
     SELECT e.name AS event_name, b.booking_date, b.total_price
     FROM bookings b
@@ -152,6 +140,7 @@ $recent = $stmt->get_result();
 
 <div class="dashboard-container">
 
+    <!--Displaying the username without escaping -->
     <h1>Welcome, <?= $user['name']; ?>!</h1>
 
     <div class="info-box">

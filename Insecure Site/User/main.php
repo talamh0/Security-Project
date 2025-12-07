@@ -2,15 +2,15 @@
 session_start();
 include 'config.php';
 
-// التحقق من تسجيل الدخول
+// Check if the user is logged in
 if(!isset($_SESSION['user_id'])) {
     header("Location: login.php?login_required=1");
     exit();
 }
 
-// بيانات المستخدم
+// User data
 $user_id = $_SESSION['user_id'];
-$username = $_SESSION['name']; // أو $_SESSION['username']
+$username = $_SESSION['name'];
 ?>
 
 <!DOCTYPE html>
@@ -86,7 +86,7 @@ $username = $_SESSION['name']; // أو $_SESSION['username']
 
             <!-- REVIEWS LIST -->
             <div class="reviews-list" id="reviews-list">
-                <!-- سيتم تحميل التعليقات من السيرفر هنا -->
+                <!-- Reviews will be dynamically loaded here -->
             </div>
 
             <!-- ADD NEW REVIEW -->
