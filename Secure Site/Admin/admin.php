@@ -18,20 +18,20 @@ if(isset($_POST['login'])){
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    
+    // use prepared statement to prevent sql injection
     $stmt = $conn->prepare("SELECT id, username, password FROM admin WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    
+    // check if admin exists
     if ($result->num_rows === 1) {
         $admin = $result->fetch_assoc();
 
-        
+        // verify password hash
         if (password_verify($password, $admin['password'])) {
 
-           
+           // set session variables
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_id'] = $admin['id'];
             $_SESSION['username'] = $admin['username'];
