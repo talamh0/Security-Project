@@ -65,9 +65,9 @@ The project contains **two versions** of the application:
 Then open the Dashboard and observe.
 
 - Try adding a comment with the following text:
-   ```html
+```html
   <img src=x onerror=alert('xss')>
-   ```
+```
 
 ### 4. Access Control  
 - In the insecure version , try accessing admin pages using a normal user:
