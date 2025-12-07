@@ -71,8 +71,11 @@ Then open the Dashboard and observe.
 
 ### 4. Access Control  
 - In the insecure version , try accessing admin pages using a normal user:
+  
 First , log in as a regular user.
+
 Then manually open this URL in the browser:
+
   `http://localhost/Admin/manageEvents.php`
 
 
