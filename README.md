@@ -73,7 +73,8 @@ Then open the Dashboard and observe.
 - In the insecure version , try accessing admin pages using a normal user:
 First , log in as a regular user.
 Then manually open this URL in the browser:
-http://localhost/insecureSite/Admin/manageEvents.php
+  `http://localhost/Admin/manageEvents.php`
+
 
 
 ### 5. Encryption 
