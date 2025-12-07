@@ -55,7 +55,17 @@ The project contains **two versions** of the application:
 //
 
 ### 2. Weak Password Storage  
-//
+Insecure Version
+
+- Passwords were stored in plain text inside the database.
+- This allows attackers to read all passwords if the database is compromised.
+
+Secure Fix
+
+Passwords are now hashed before being stored:
+$hashed = password_hash($password, PASSWORD_DEFAULT);
+Verification is done securely using:
+password_verify($password, $user['password']);
 
 ### 3. Cross-Site Scripting (XSS)  
 - When registe , try using this username:
