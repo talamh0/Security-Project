@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (count($errors) === 0) {
 
         // secure password hashing
-        $hashed = password_hash($password, PASSWORD_DEFAULT);
+        $hashed = password_hash($password, PASSWORD_BCRYPT);
 
         $stmt = $conn->prepare("
             INSERT INTO users (name, email, password)
