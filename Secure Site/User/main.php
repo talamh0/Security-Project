@@ -4,13 +4,13 @@ require_once 'security_config.php';
 
 include 'config.php';
 
-// التحقق من تسجيل الدخول
+// access control: check if the user is logged in
 if(!isset($_SESSION['user_id'])) {
     header("Location: login.php?login_required=1");
     exit();
 }
 
-// بيانات المستخدم
+// user data is secured via session
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['name']; 
 ?>
@@ -89,7 +89,7 @@ $username = $_SESSION['name'];
 
                 <!-- REVIEWS LIST -->
                 <div class="reviews-list" id="reviews-list">
-                    <!-- سيتم تحميل التعليقات من السيرفر هنا -->
+                   
                 </div>
 
                 <!-- ADD NEW REVIEW -->
@@ -141,5 +141,6 @@ $username = $_SESSION['name'];
 
     </body>
 </html>
+
 
 
