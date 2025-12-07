@@ -50,7 +50,6 @@ The project contains **two versions** of the application:
 ---
 
 ## Security Testing Instructions
-//
 
 ### 1. SQL Injection  
 //
@@ -59,7 +58,12 @@ The project contains **two versions** of the application:
 //
 
 ### 3. Cross-Site Scripting (XSS)  
-//
+1- When registe , try using this username:
+```<script>alert('xss')</script>```
+Then open the Dashboard and observe.
+
+2- Try adding a comment with the following text:
+```<img src=x onerror=alert('xss')>```
 
 ### 4. Access Control  
 //
