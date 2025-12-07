@@ -15,14 +15,17 @@ $query = "
 $result = mysqli_query($conn, $query);
 
 $reviews = [];
+// loop through results and apply xss protection before output
 while($row = mysqli_fetch_assoc($result)){
     $reviews[] = [
+              // sanitize username to prevent xss
         "username" => htmlspecialchars($row['username'], ENT_QUOTES),
         "rating" => $row['rating'],
+        // sanitize review text to prevent xss
         "text" => htmlspecialchars($row['text'], ENT_QUOTES),
         "created_at" => $row['created_at']
     ];
 }
-
+// return the sanitized data as a json array
 echo json_encode($reviews);
 ?>
