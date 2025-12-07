@@ -55,10 +55,11 @@ The project contains **two versions** of the application:
 **Insecure Version**
 - The login query was built using string concatenation, which allowed attackers to inject SQL code.
   
+  Example entered in the username field:
 ```php
 ' OR '1'='1' #
 ```
-This logs the user in without knowing any password.
+This allows the user to log in.
 
 **Secure Fix**
 - We fixed the SQL Injection vulnerability by using prepared statements, which safely separate user input from the SQL query structure.
