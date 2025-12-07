@@ -2,6 +2,7 @@
 // Session Protection
 session_start();
 
+// Basic access control: only users with a valid session (user_id) can access the dashboard.
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
