@@ -2,6 +2,9 @@
 // Load security configurations (HTTPS enforcement, session setup) and start session.
 require_once 'security_config.php';
 
+// Role-based access control (RBAC):
+// This dashboard is restricted to authenticated users with role = 'user'.
+// Any request without the correct role is redirected to the login page.
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
     header("Location: index.php");
     exit();
