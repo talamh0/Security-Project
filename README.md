@@ -66,6 +66,7 @@ This allows the user to log in.
 ### 2. Weak Password Storage
 
 Passwords in the insecure version were stored using MD5, which is weak and easily cracked.
+
 1- Register a new user.
 
 2- Open phpMyAdmin → users table.
