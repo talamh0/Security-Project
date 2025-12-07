@@ -3,6 +3,7 @@ session_start();
 include 'config.php';
 header('Content-Type: application/json');
 
+// Basic access control: only users with a valid session can add reviews.
 if(!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
     exit();
