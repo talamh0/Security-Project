@@ -61,13 +61,14 @@ Insecure Version
 - This allows attackers to read all passwords if the database is compromised.
 
 Secure Fix
-
-Passwords are now hashed before storing in the database using password_hash().
-Verification is done securely using password_verify().
+إليك النسخة **المطابقة 100% لشك
+```php
 $hashed = password_hash($password, PASSWORD_DEFAULT);
 
 if (password_verify($password, $user['password'])) {
-    // login success
+    // Login successful
+}
+
 }
 
 
