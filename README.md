@@ -118,15 +118,15 @@ Then manually open this URL in the browser:
 
 all in `security_config.php`
 
-# HTTPS Redirection
+- HTTPS Redirection
 http://localhost/... → redirects to https://...
 Triggered by: `if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off")`
 
-# Secure Session Cookies
+- Secure Session Cookies
 Cookie flags must be: `'Secure=true'', ''HttpOnly=true'', ''SameSite=Strict'`
 Set via: `session_set_cookie_params([...])`
 
-# Session Start
+- Session Start
 All protected pages must run: `session_start()`
 
 
