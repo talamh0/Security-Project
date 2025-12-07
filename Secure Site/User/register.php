@@ -47,7 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // secure password hashing
         $hashed = password_hash($password, PASSWORD_BCRYPT);
-
+        
+        // Access Control Note:
+        // New users are inserted without specifying a role.
+        // The database assigns role = 'user' by default, ensuring they do not receive admin privileges.
         $stmt = $conn->prepare("
             INSERT INTO users (name, email, password)
             VALUES (?, ?, ?)
