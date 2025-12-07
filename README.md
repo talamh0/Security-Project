@@ -52,23 +52,15 @@ The project contains **two versions** of the application:
 ## Security Testing Instructions
 
 ### 1. SQL Injection  
-**Insecure Version**
-- The login query was built using string concatenation, which allowed attackers to inject SQL code.
-  
-  Example entered in the username field:
+
+- Open the login page in the insecure version.
+
+- In the username field, enter:
+
 ```php
 ' OR '1'='1' #
 ```
 This allows the user to log in.
-
-**Secure Fix**
-- We fixed the SQL Injection vulnerability by using prepared statements, which safely separate user input from the SQL query structure.
-
-```php
-$stmt = $conn->prepare("SELECT id, name, password, role FROM users WHERE name = ?");
-$stmt->bind_param("s", $username);
-$stmt->execute();
-```
 
 
 ### 2. Weak Password Storage
