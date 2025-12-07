@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] = "Passwords do not match.";
     }
 
-    // check duplicate email
+    // check duplicate email (still insecure - SQL Injection allowed)
     $checkEmail = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $checkEmail);
 
@@ -33,26 +33,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // insert if no errors
     if (count($errors) === 0) {
 
+        // Insecure Hash (MD5)
+        $md5_password = md5($password);
 
-        // insert user
-    $sql = "INSERT INTO users (name, email, password)
-        VALUES ('$name', '$email', '$password')";
+        // Insert with insecure MD5 hashing
+        $sql = "INSERT INTO users (name, email, password)
+                VALUES ('$name', '$email', '$md5_password')";
 
-
-        // success redirect
         if (mysqli_query($conn, $sql)) {
             header("Location: index.php?registered=1");
             exit();
-
         } else {
-
-            // insert error
             $errors[] = "An error occurred during registration.";
         }
     }
 }
 ?>
-
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
