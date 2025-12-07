@@ -1,5 +1,6 @@
 <?php
 
+// Load security configurations (HTTPS enforcement, session setup) and start session.
 require_once 'security_config.php';
 
 if(isset($_SESSION['admin_logged_in'])){
