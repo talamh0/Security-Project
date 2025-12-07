@@ -1,67 +1,71 @@
-
 <?php
-// Load security configurations (HTTPS enforcement, session setup) and start session.
+// load core security configurations (https enforcement, secure cookies) and start session
 require_once 'security_config.php';
 
+// load database connection settings
 include 'config.php';
 
-// default error
+// default error message variable
 $error = "";
 
-// handle login form
+// handle login form submission (post request)
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // get form inputs
-    $email = isset($_POST["email"]) ? trim($_POST["email"]) : "";
+    // get and sanitize form inputs
+    $username = isset($_POST["name"]) ? trim($_POST["name"]) : "";
     $password = isset($_POST["password"]) ? trim($_POST["password"]) : "";
 
-    // validate inputs
-    if (empty($email) || empty($password)) {
-        $error = "Please fill in all fields.";
+    // validate inputs (check if fields are empty)
+    if (empty($username) || empty($password)) {
+        $error = "please fill in all fields.";
 
     } else {
 
-        // check email in database
-        $stmt = $conn->prepare("SELECT id, name, password , role FROM users WHERE email = ?");
-        $stmt->bind_param("s", $email);
+        // check username in database using prepared statement (prevents sql injection)
+        $stmt = $conn->prepare("SELECT id, name, password, role FROM users WHERE name = ?");
+        $stmt->bind_param("s", $username);
         $stmt->execute();
+
         $result = $stmt->get_result();
-        // email found
+
+        // check if username was found
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
 
-            // verify password
-          if (password_verify($password, $row["password"])) {
-                // store session data
+            // verify submitted password against the stored bcrypt hash
+            if (password_verify($password, $row["password"])) {
+
+                // login successful: store secure session data
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['name']    = $row['name'];
                 $_SESSION['role']    = $row['role'];
 
-
+                // redirect to main page
                 header("Location: main.php");
                 exit();
 
             } else {
-                $error = "Wrong password.";
+                // password verification failed
+                $error = "wrong password.";
             }
 
         } else {
-            $error = "User not found.";
+            // username not found
+            $error = "user not found.";
         }
     }
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login | Event Booking System</title>
+    <title>login | event booking system</title>
 
-    <!-- main css -->
-    <link rel="stylesheet" href="User-style.css">
+    <link rel="stylesheet" href="user-style.css">
 
-    <!-- fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 
@@ -74,41 +78,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="login-page">
 <div class="auth-box">
 
-    <!-- logo -->
     <div style="text-align:center; margin-bottom:20px;">
-        <img src="../image/sixflags.png" alt="Logo" style="width:160px;">
+        <img src="../image/sixflags.png" alt="logo" style="width:160px;">
     </div>
 
-    <!-- page title -->
-    <h2 style="text-align:center;">Login</h2>
+    <h2 style="text-align:center;">login</h2>
 
     <?php
     // success message after registration
     if (isset($_GET["registered"])) {
-        echo "<div class='success'>Account created successfully. You can now login.</div>";
+        echo "<div class='success'>account created successfully. you can now login.</div>";
     }
 
     // user tried accessing a protected page
     if (isset($_GET["login_required"])) {
-        echo "<div class='error'>Please login to continue.</div>";
+        echo "<div class='error'>please login to continue.</div>";
     }
 
-    // login errors
+    // display login errors
     if (!empty($error)) {
         echo "<div class='error'>$error</div>";
     }
     ?>
 
-    <!-- login form -->
     <form method="POST" action="">
-        <input type="email" name="email" placeholder="Email Address">
-        <input type="password" name="password" placeholder="Password">
-        <button type="submit">Login</button>
+        <input type="text" name="name" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <button type="submit">login</button>
     </form>
 
-    <!-- register link -->
     <div class="link">
-        Not a member? <a href="register.php">Create an account</a>
+        not a member? <a href="register.php">create an account</a>
     </div>
 
 </div>
