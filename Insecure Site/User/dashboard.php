@@ -152,7 +152,7 @@ $recent = $stmt->get_result();
 
 <div class="dashboard-container">
 
-    <h1>Welcome, <?= htmlspecialchars($user['name']); ?>!</h1>
+    <h1>Welcome, <?= $user['name']; ?>!</h1>
 
     <div class="info-box">
         <p><strong>Your Email:</strong> <?= htmlspecialchars($user['email']); ?></p>

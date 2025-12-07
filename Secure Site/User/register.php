@@ -1,5 +1,3 @@
-
-
 <?php
 include 'config.php';
 
@@ -14,8 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = trim($_POST["password"]);
     $confirm  = trim($_POST["confirm"]);
 
+    $clean_name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+
+
     // validate required fields
-    if (empty($name) || empty($email) || empty($password) || empty($confirm)) {
+    if (empty($clean_name) || empty($email) || empty($password) || empty($confirm)) {
         $errors[] = "All fields are required.";
     }
 
@@ -44,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             INSERT INTO users (name, email, password)
             VALUES (?, ?, ?)
         ");
-        $stmt->bind_param("sss", $name, $email, $hashed);
+        $stmt->bind_param("sss", $clean_name, $email, $hashed);
 
         if ($stmt->execute()) {
             header("Location: index.php?registered=1");
@@ -74,46 +75,45 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <body style="
     background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('../image/hero-bg.png') no-repeat center center fixed;
+    url('/web/image/hero-bg.png') no-repeat center center fixed;
     background-size: cover;
-">
+    ">
 
-<div class="login-page">
-<div class="auth-box">
+    <div class="login-page">
+        <div class="auth-box">
 
-    <!-- logo -->
-    <div style="text-align:center; margin-bottom:20px;">
-        <img src="../image/sixflags.png" alt="Logo" style="width:160px;">
+            <!-- logo -->
+            <div style="text-align:center; margin-bottom:20px;">
+                <img src="/web/image/sixflags.png" alt="Logo" style="width:160px;">
+            </div>
+
+            <!-- page heading -->
+            <h2>Create Account</h2>
+
+            <!-- show errors -->
+            <?php
+            if (!empty($errors)) {
+                echo "<div class='error'>";
+                foreach ($errors as $e) echo "<p>$e</p>";
+                echo "</div>";
+            }
+            ?>
+
+            <!-- register form -->
+            <form method="POST" action="">
+                <input type="text" name="name" placeholder="Full Name">
+                <input type="email" name="email" placeholder="Email Address">
+                <input type="password" name="password" placeholder="Password">
+                <input type="password" name="confirm" placeholder="Confirm Password">
+                <button type="submit">Register</button>
+            </form>
+
+            <!-- login link -->
+            <div class="link">
+                Already have an account? <a href="index.php">Login here</a>
+            </div>
+
+        </div>
     </div>
-
-    <!-- page heading -->
-    <h2>Create Account</h2>
-
-    <!-- show errors -->
-    <?php
-    if (!empty($errors)) {
-        echo "<div class='error'>";
-        foreach ($errors as $e) echo "<p>$e</p>";
-        echo "</div>";
-    }
-    ?>
-
-    <!-- register form -->
-    <form method="POST" action="">
-        <input type="text" name="name" placeholder="Full Name">
-        <input type="email" name="email" placeholder="Email Address">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="confirm" placeholder="Confirm Password">
-        <button type="submit">Register</button>
-    </form>
-
-    <!-- login link -->
-    <div class="link">
-        Already have an account? <a href="index.php">Login here</a>
-    </div>
-
-</div>
-</div>
-
 </body>
 </html>
