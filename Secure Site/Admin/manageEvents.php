@@ -2,7 +2,9 @@
 // Load security configurations (HTTPS enforcement, session setup) and start session.
 require_once 'security_config.php';
 
-// Restrict access to admin users only
+// Role-based Access Control (RBAC):
+// Only authenticated users with role = 'admin' are allowed to access this page.
+// If the role is missing or not 'admin', redirect to the admin login page.
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: Admin.php");
     exit();
