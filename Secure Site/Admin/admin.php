@@ -1,29 +1,48 @@
 <?php
 session_start();
 
-// Redirect already logged-in admins directly to the dashboard
 if(isset($_SESSION['admin_logged_in'])){
     header("Location: manageEvents.php");
     exit();
 }
 
-// Store login error message
 $error = "";
 
-// Process login form submission
 if(isset($_POST['login'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
 
-    // Process login form submission
-    if($username === "admin" && $password === "admin123"){
-        // Store admin login session and redirect
-        $_SESSION['role'] = 'admin';
-        header("Location: manageEvents.php");
-        exit();
+    include("config.php");
+
+    // sanitize input
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
+    
+    $stmt = $conn->prepare("SELECT id, username, password FROM admin WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    
+    if ($result->num_rows === 1) {
+        $admin = $result->fetch_assoc();
+
+        
+        if (password_verify($password, $admin['password'])) {
+
+           
+            $_SESSION['admin_logged_in'] = true;
+            $_SESSION['admin_id'] = $admin['id'];
+            $_SESSION['username'] = $admin['username'];
+
+            header("Location: manageEvents.php");
+            exit();
+
+        } else {
+            $error = "Incorrect password.";
+        }
+
     } else {
-        // Show error if credentials are incorrect
-        $error = "Invalid username or password.";
+        $error = "Admin not found.";
     }
 }
 ?>
