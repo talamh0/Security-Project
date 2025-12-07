@@ -78,6 +78,7 @@ if (password_verify($password, $user['password'])) {
 
 ```html
 <script>alert('xss')</script>
+```
 
 Then open the Dashboard and observe.
 
