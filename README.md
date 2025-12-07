@@ -72,11 +72,13 @@ if (password_verify($password, $user['password'])) {
 
 
 
-### 3. Cross-Site Scripting (XSS)  
-- When registe , try using this username:
+### 3. Cross-Site Scripting (XSS)
+
+- When registering, try using this username:
+
 ```html
 <script>alert('xss')</script>
-```
+
 Then open the Dashboard and observe.
 
 - Try adding a comment with the following text:
