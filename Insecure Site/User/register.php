@@ -6,23 +6,22 @@ $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // get form values
-    $name     = trim($_POST["name"]);
-    $email    = trim($_POST["email"]);
-    $password = trim($_POST["password"]);
-    $confirm  = trim($_POST["confirm"]);
+    // get form values 
+    $name     = $_POST["name"];
+    $email    = $_POST["email"];
+    $password = $_POST["password"];
+    $confirm  = $_POST["confirm"];
 
-    // validate required fields
+    // basic validation only (still insecure)
     if (empty($name) || empty($email) || empty($password) || empty($confirm)) {
         $errors[] = "All fields are required.";
     }
 
-    // check password match
     if ($password !== $confirm) {
         $errors[] = "Passwords do not match.";
     }
 
-    // check duplicate email (still insecure - SQL Injection allowed)
+    // insecure SQL query – SQL Injection allowed
     $checkEmail = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $checkEmail);
 
@@ -30,15 +29,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] = "Email is already registered.";
     }
 
-    // insert if no errors
     if (count($errors) === 0) {
 
-        // Insecure Hash (MD5)
-        $md5_password = md5($password);
+        //  Weak password hashing (MD5)
+        $md5_pass = md5($password);
 
-        // Insert with insecure MD5 hashing
+        // still insecure SQL (no prepared statements)
         $sql = "INSERT INTO users (name, email, password)
-                VALUES ('$name', '$email', '$md5_password')";
+                VALUES ('$name', '$email', '$md5_pass')";
 
         if (mysqli_query($conn, $sql)) {
             header("Location: index.php?registered=1");
