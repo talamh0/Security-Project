@@ -54,14 +54,15 @@ The project contains **two versions** of the application:
 ### 1. SQL Injection  
 //
 
-### 2. Weak Password Storage  
-Insecure Version
+### 2. Weak Password Storage
 
+**Insecure Version**
 - Passwords were stored in plain text inside the database.
 - This allows attackers to read all passwords if the database is compromised.
 
-Secure Fix
-إليك النسخة **المطابقة 100% لشك
+**Secure Fix**
+Use hashing + verification:
+
 ```php
 $hashed = password_hash($password, PASSWORD_DEFAULT);
 
@@ -69,7 +70,6 @@ if (password_verify($password, $user['password'])) {
     // Login successful
 }
 
-}
 
 
 ### 3. Cross-Site Scripting (XSS)  
