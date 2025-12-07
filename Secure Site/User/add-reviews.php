@@ -2,22 +2,22 @@
 // Load security configurations (HTTPS enforcement, session setup) and start session.
 require_once 'security_config.php';
 
-
+// load database connection settings
 include 'config.php';
 header('Content-Type: application/json');
 
-// التحقق من تسجيل الدخول
+// check if user is logged in and has the required 'user' role
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
     exit();
 }
 
-// قراءة البيانات المرسلة من fetch
+// read raw json data sent from javascript fetch api
 $data = json_decode(file_get_contents("php://input"), true);
 $text = trim($data['text']);
 $rating = intval($data['rating']);
 
-// التحقق من صحة البيانات
+// validate received data (check for emptiness and valid rating range)
 if(empty($text) || $rating < 1 || $rating > 5) {
     echo json_encode(['success' => false, 'message' => 'Invalid input']);
     exit();
@@ -25,18 +25,20 @@ if(empty($text) || $rating < 1 || $rating > 5) {
 
 $user_id = $_SESSION['user_id'];
 
-// تنظيف مدخلات النص لمنع XSS
+// sanitize text input to prevent cross-site scripting (xss) during output
+// ent_quotes is used to handle both single and double quotes securely
 $clean_text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 
 
-// إدراج التعليق في قاعدة البيانات
+// insert the new review into the database using a prepared statement
 $stmt = $conn->prepare("INSERT INTO reviews (user_id, rating, text) VALUES (?, ?, ?)");
 $stmt->bind_param("iis", $user_id, $rating, $clean_text);
 
 if ($stmt->execute()) {
     $last_id = $stmt->insert_id;;
 
-    // استرجاع التعليق المضاف مع اسم المستخدم
+    // retrieve the newly added review along with the username for response
+    // a prepared statement is used for secure retrieval by id
      $stmt2 = $conn->prepare("
         SELECT r.id, u.name AS username, r.rating, r.text, r.created_at
         FROM reviews r
